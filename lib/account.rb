@@ -2,6 +2,7 @@ require_relative 'statement'
 
 class Account
   attr_reader :balance, :statement
+  DATE_FORMAT = "%d/%m/%Y"
 
   def initialize
     @balance = 0
@@ -10,13 +11,13 @@ class Account
 
   def deposit(amount)
     @balance += amount
-    @statement.add_action(date, amount, nil, @balance)
+    add_to_statement(amount, nil)
   end
 
   def withdraw(amount)
     fail 'Not enough funds' if amount > @balance
     @balance -= amount
-    @statement.add_action(date, nil, amount, @balance)
+    add_to_statement(nil, amount)
   end
 
   def print_statement
@@ -26,7 +27,11 @@ class Account
   private
 
   def date
-    Time.now.strftime("%d/%m/%Y")
+    Time.now.strftime(DATE_FORMAT)
+  end
+
+  def add_to_statement(credit, debit)
+    @statement.add_action(date, credit, debit, @balance)
   end
 
 end

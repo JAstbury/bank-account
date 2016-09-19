@@ -1,5 +1,6 @@
 class Statement
   attr_reader :history
+  DATE_FORMAT = "%d/%m/%Y"
 
   def initialize
     @history = []
@@ -13,8 +14,14 @@ class Statement
   def print
     puts "date || credit || debit || balance"
     @history.each do |action|
-      puts "#{action["Date"]} || #{action["Credit"]} || #{action["Debit"]} || #{action["Balance"]}"
+      puts "#{action["Date"]} || #{print_amount(action["Credit"])} || #{print_amount(action["Debit"])} || #{print_amount(action["Balance"])}"
     end
+  end
+
+  private
+
+  def print_amount(amount)
+    '%.2f' % amount unless amount.nil?
   end
 
 end

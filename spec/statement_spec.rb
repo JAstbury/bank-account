@@ -24,8 +24,8 @@ describe Statement do
       subject.add_action("14/09/2016", 500, nil, 500)
       subject.add_action("15/09/2016", nil, 300, 200)
       expect(STDOUT).to receive(:puts).with("date || credit || debit || balance")
-      expect(STDOUT).to receive(:puts).with("14/09/2016 || 500 ||  || 500")
-      expect(STDOUT).to receive(:puts).with("15/09/2016 ||  || 300 || 200")
+      expect(STDOUT).to receive(:puts).with("14/09/2016 || 500.00 ||  || 500.00")
+      expect(STDOUT).to receive(:puts).with("15/09/2016 ||  || 300.00 || 200.00")
       subject.print
     end
   end

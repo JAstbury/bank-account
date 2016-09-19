@@ -41,7 +41,7 @@ describe Account do
     end
 
     it 'sends the action to the statement' do
-      Time.stub(:now).and_return(Time.new(2016, 9, 19))
+      allow(Time).to receive(:now).and_return(Time.new(2016, 9, 19))
       subject.deposit(500)
       expect(subject.statement).to receive(:add_action).with("19/09/2016", nil, 300, 200)
       subject.withdraw(300)
